@@ -78,5 +78,5 @@ React Native 的核心概念也同样适用于 React VR。这里列举了一些�
 
 #### React Native Packager
 
-
+React 的 JavaScript 代码会在浏览器中运行前进行预编译处理。这预处理就是通过 React Native Packager 执行的。这个工程类似 Browserify 和 Webpack，同时提供了类似 CommonJs 的模块系统，JavaScript 编译（ES6，Flow，JSX），构建和静态资源加载。
 
