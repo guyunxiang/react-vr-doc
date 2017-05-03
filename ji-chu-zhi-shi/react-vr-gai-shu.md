@@ -32,25 +32,25 @@ React.createElement(
 
 使用 React 必需要了解一些术语和核心概念。这里快速列举了最为重要的概念以及他们之间是如何相互影响的。
 
-Components - 组件是可复用的 UI 元素，它可以以标签的形式使用，例如 `<Greeting />` 。React Native 提供了一些内置的组件例如：`Text` 和 `Image`。自定义的组件可以通过 `React.Component` 来声明。每一个自定义的组件都包含一个 `render()` 函数，它只返回一个孩子元素，用以完整的描述组件的内容。
+* **Components** - 组件是可复用的 UI 元素，它可以以标签的形式使用，例如 `<Greeting />` 。React Native 提供了一些内置的组件例如：`Text` 和 `Image`。自定义的组件可以通过 `React.Component` 来声明。每一个自定义的组件都包含一个 `render()` 函数，它只返回一个孩子元素，用以完整的描述组件的内容。
 
-Props - 组件可以接受一些参数，例如 `<Greeting name='Rexxar' />` 中的 `name` 。类似的这种参数被称之为属性或者 props，可以通过 `this.props` 来访问它们。上文中的例子，name ，可以用 `{this.props.name}` 访问。你可以了解更多关于这种交互式组件 props 和 State 的[详细文档](https://facebook.github.io/react-vr/docs/components-props-and-state.html)。
+* **Props** - 组件可以接受一些参数，例如 `<Greeting name='Rexxar' />` 中的 `name` 。类似的这种参数被称之为属性或者 props，可以通过 `this.props` 来访问它们。上文中的例子，name ，可以用 `{this.props.name}` 访问。你可以了解更多关于这种交互式组件 props 和 State 的[详细文档](https://facebook.github.io/react-vr/docs/components-props-and-state.html)。
 
-State -组件可以通过维护内部的状态来影响组件的显示。当 state 的数据发生变化，组件会重新刷新自己。根据 React 的约定，所有可以修改的 state 都在 `this.state` 对象上。组件只能够通过专有的 `setState` 方法来修改 state，例如：
+* **State** -组件可以通过维护内部的状态来影响组件的显示。当 state 的数据发生变化，组件会重新刷新自己。根据 React 的约定，所有可以修改的 state 都在 `this.state` 对象上。组件只能够通过专有的 `setState` 方法来修改 state，例如：
 
 ```javascript
 this.setState({myStateVariableCounter: 10})
 ```
 
-Events - 组件可以发生事件，当它触发时可以提供特定的 UI 动作。例如：`View` 组件在光标进入或者离开这块区域时会分别触发 `onEnter` 和 `onExit` 事件，可以在组件声明式适当添加一些交互当这些事件触发时。举个例子：
+* **Events** - 组件可以发生事件，当它触发时可以提供特定的 UI 动作。例如：`View` 组件在光标进入或者离开这块区域时会分别触发 `onEnter` 和 `onExit` 事件，可以在组件声明式适当添加一些交互当这些事件触发时。举个例子：
 
 ```javascript
 <View onEnter={() => this.setState({hasFocus: true})}>
 ```
 
-Layout - React 使用 flexbox 算法和布局规则将组件放置在一个二维平面上。这总布局考虑组件的尺寸，要么计算、要么指定组件的宽度和高度，以及控制组件的样式及属性，例如 `alignItems` 。更多描述见 [Layout 和 Style](https://facebook.github.io/react-vr/docs/layout-and-style.html)。
+* **Layout** - React 使用 flexbox 算法和布局规则将组件放置在一个二维平面上。这总布局考虑组件的尺寸，要么计算、要么指定组件的宽度和高度，以及控制组件的样式及属性，例如 `alignItems` 。更多描述见 [Layout 和 Style](https://facebook.github.io/react-vr/docs/layout-and-style.html)。
 
-Style - 样式对象控制了组件的显示和布局。它们通常通过指定一个样式对象，例如：
+* **Style** - 样式对象控制了组件的显示和布局。它们通常通过指定一个样式对象，例如：
 
 ```javascript
 <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}}/>
@@ -61,6 +61,22 @@ Style - 样式对象控制了组件的显示和布局。它们通常通过指定
 下面来更详细的描述这些项目。
 
 #### React 生态系统
+
+虽然最初的 web 开发是非常简化的，现在的 React 生态圈已经发展到包含以下几个产品：
+
+* React - 最初的库，它的目标是用来在 web 浏览器中创建 DOM。
+
+* React Native - 目标是通过原生的组件可以开发 IOS 和 Android 的APP应用。React Native 的构建是在 React 的核心基础之上。
+
+* React VR - 一个我们正在学习的新库，这个可以用来开发 VR 的界面。React VR 的构建是在 React Native 框架基础之上。
+
+当它在浏览器中运行时，React VR 在结构上较 React 而言，与 React Native 有更多相同点。它支持需要相同的标签例如 `<View>` 和 `<Text>` 。除了 2D 布局，它还包含了 3D 场景、转换和全景的概念，允许对象被放置在 3D 空间来呈现虚拟现实场景。
+
+好的技术实现，React VR 使用了一个简单的 OVRUI 库，它使用了当前流行的 three.js JavaScript 3D 引擎。Three.js 在浏览器中运行，并通过 WebGL 呈现场景。通过 VR 头盔可以访问所有 Web VR 的接口，它可以在 Riff、GearVR 或者其他设备中显示。React VR 则不然，它不是必须要 VR 头盔才能运行，它也可以在浏览器或者移动手机上创建交互式的360度全景体验。
+
+React Native 的核心概念也同样适用于 React VR。这里列举了一些核心概念，详情链接以及更多信息的介绍。
+
+#### React Native Packager
 
 
 
