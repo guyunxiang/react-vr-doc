@@ -80,3 +80,39 @@ React Native 的核心概念也同样适用于 React VR。这里列举了一些�
 
 React 的 JavaScript 代码会在浏览器中运行前进行预编译处理。这预处理就是通过 React Native Packager 执行的。这个工程类似 Browserify 和 Webpack，同时提供了类似 CommonJs 的模块系统，JavaScript 编译（ES6，Flow，JSX），构建和静态资源加载。
 
+React VR 我们通常使用两个关键的命令：
+
+* **bundle**：处理，转换以及合并多个 JavaScript 文件为单一的 JavaScript 文件。
+
+* **start**：加载 react native 依赖包并启动 web server 服务，同时动态的将 js 文件转换成编译后的文件。
+
+执行 **npm start** 运行包管理器，这是下面这段命令的快捷执行方式：
+
+```bash
+node node_modules/react-native/local-cli/cli.js start
+```
+
+在这种模式下，这依赖包表现的像是为大多数内容提供一个本地服务，但是也有像将 React 代码进行编译或者将 JSX 代码转换成原生的 JavaScript 代码这种重要的依赖包。你可以在你的第一个项目中执行 **npm start** 查看编译后的输出，然后来浏览器中访问 [http://localhost:8081/index.vr.bundle?platform=vr](http://localhost:8081/index.vr.bundle?platform=vr)
+
+对于静态网站，你需要保存生成的静态页面。你可以执行 npm run bundle 来完成如下的这些命令同样的效果：
+
+```bash
+node node_modules/react-native/local-cli/cli.js bundle --entry-file
+index.vr.js --platform vr --dev false --bundle-output
+index.vr.bundle
+```
+
+这种生成的 index.vr.bundle 文件包含了 JavaScript 代码，可以直接获取和放在 HTML 的 `script` 标签中使用。
+
+由于项目范围，我们在这里只讨论如何使用，想要了解更多信息请看 [React Native Packager](https://github.com/facebook/react-native/blob/master/packager/README.md)。
+
+#### Networking
+
+React VR 使用的是 Fetch API 来访问网络资源。如果你之前使用过 XMLHttpRequest 或者其他网络API，你可能会觉得熟悉。
+
+想要了解更多关于 React Native 使用 Fetch 的资料，你可以阅读 [Networking](https://facebook.github.io/react-native/docs/network.html) 。
+
+想要了解完整的 Fetch 属性列表，你可以阅读[ Fetch 请求文档](https://developer.mozilla.org/en-US/docs/Web/API/Request)。
+
+想要了解 Fetch 的 API 文档，你可以阅读[ Fetch API 文档](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。 
+
